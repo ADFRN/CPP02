@@ -6,7 +6,7 @@
 /*   By: afournie <afournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 11:39:20 by afournie          #+#    #+#             */
-/*   Updated: 2026/06/03 12:14:47 by afournie         ###   ########.fr       */
+/*   Updated: 2026/06/04 11:52:37 by afournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ Fixed::Fixed(const Fixed& other)
 {
 	*this = other;
 }
+
+Fixed::~Fixed()
+{
+	return ;
+}
+
 Fixed& Fixed::operator=(const Fixed& other)
 {
 	if (this != &other)
@@ -38,9 +44,58 @@ Fixed& Fixed::operator=(const Fixed& other)
 	return (*this);
 }
 
-Fixed::~Fixed()
+Fixed Fixed::operator+(const Fixed& other) const
 {
-	return ;
+	Fixed result;
+	result.setRawBits(this->fixed_point + other.fixed_point);
+	return (result);
+}
+
+Fixed Fixed::operator-(const Fixed& other) const
+{
+	Fixed result;
+	result.setRawBits(this->fixed_point - other.fixed_point);
+	return (result);
+}
+
+Fixed Fixed::operator*(const Fixed& other) const
+{
+	Fixed result;
+	result.setRawBits((this->fixed_point * other.fixed_point) >> fractionnal);
+	return (result);
+}
+
+Fixed Fixed::operator/(const Fixed& other) const
+{
+	Fixed result;
+	result.setRawBits((this->fixed_point << fractionnal) / other.fixed_point);
+	return (result);
+}
+
+Fixed& Fixed::operator++()
+{
+	fixed_point += 1;
+	return (*this);
+}
+
+Fixed Fixed::operator++(int)
+{
+	Fixed tmp(*this);
+	fixed_point += 1;
+	return tmp;
+}
+
+Fixed& Fixed::operator--()
+{
+	fixed_point -= 1;
+	return *this;
+}
+
+Fixed Fixed::operator--(int)
+{
+	Fixed tmp(*this);
+	fixed_point -= 1;
+	return tmp;
 }
 
 int Fixed::getRawBits(void) const
@@ -97,4 +152,32 @@ bool Fixed::operator==(const Fixed& other) const
 bool Fixed::operator!=(const Fixed& other) const
 {
 	return (this->fixed_point != other.fixed_point);
+}
+
+Fixed& Fixed::min(Fixed& a, Fixed& b)
+{
+	if (a < b)
+		return a;
+	return b;
+}
+
+const Fixed& Fixed::min(const Fixed& a, const Fixed& b)
+{
+	if (a < b)
+		return a;
+	return b;
+}
+
+Fixed& Fixed::max(Fixed& a, Fixed& b)
+{
+	if (a > b)
+		return a;
+	return b;
+}
+
+const Fixed& Fixed::max(const Fixed& a, const Fixed& b)
+{
+	if (a > b)
+		return a;
+	return b;
 }

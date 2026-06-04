@@ -6,7 +6,7 @@
 /*   By: afournie <afournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 11:39:05 by afournie          #+#    #+#             */
-/*   Updated: 2026/06/03 12:11:06 by afournie         ###   ########.fr       */
+/*   Updated: 2026/06/04 11:50:37 by afournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,36 @@ class Fixed
 		Fixed(const int number);
 		Fixed(const float number);
 		Fixed(const Fixed& other);
-		Fixed& operator=(const Fixed& other);
 		~Fixed();
 
-		int getRawBits( void ) const;
-		void setRawBits( int const raw);
-		float toFloat( void ) const;
-		int toInt( void ) const;
+		Fixed& operator=(const Fixed& other);
+		Fixed& operator++( void );
+		Fixed operator++( int );
+		Fixed& operator--( void );
+		Fixed operator--( int );
+		Fixed operator+(const Fixed& other) const;
+		Fixed operator-(const Fixed& other) const;
+		Fixed operator*(const Fixed& other) const;
+		Fixed operator/(const Fixed& other) const;
+
 		bool operator>(const Fixed& other) const;
 		bool operator<(const Fixed& other) const;
 		bool operator>=(const Fixed& other) const;
 		bool operator<=(const Fixed& other) const;
 		bool operator==(const Fixed& other) const;
 		bool operator!=(const Fixed& other) const;
+
+		int getRawBits( void ) const;
+		void setRawBits( int const raw);
+
+		float toFloat( void ) const;
+		int toInt( void ) const;
+
+		static Fixed& min(Fixed& a, Fixed& b);
+		static const Fixed& min(const Fixed& a, const Fixed& b);
+
+		static Fixed& max(Fixed& a, Fixed& b);
+		static const Fixed& max(const Fixed& a, const Fixed& b);
 };
 
 std::ostream& operator<<(std::ostream& out, const Fixed& fixed);
