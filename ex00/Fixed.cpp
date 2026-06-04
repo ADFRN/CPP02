@@ -6,13 +6,11 @@
 /*   By: afournie <afournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 11:12:53 by afournie          #+#    #+#             */
-/*   Updated: 2026/06/03 11:35:23 by afournie         ###   ########.fr       */
+/*   Updated: 2026/06/03 12:00:28 by afournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
-
-const int Fixed::fractionnal = 8;
 
 Fixed::Fixed()
 {
