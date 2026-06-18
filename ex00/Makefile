@@ -6,11 +6,12 @@
 #    By: afournie <afournie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/06/03 11:13:31 by afournie          #+#    #+#              #
-#    Updated: 2026/06/17 13:30:57 by afournie         ###   ########.fr        #
+#    Updated: 2026/06/18 15:12:50 by afournie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC			= main.cpp Fixed.cpp
+INC			= Fixed.hpp
 OBJ			= $(SRC:.cpp=.o)
 
 CXX			= c++
@@ -21,7 +22,7 @@ NAME		= fixed
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(INC)
 	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 clean:
